@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 新年倒计时 - 与时间共舞</title>
+    
+    <!-- 微信分享优化 -->
+    <meta name="description" content="2026新年倒计时，与全球一起迎接崭新的一年">
+    <meta property="og:title" content="2026 新年倒计时">
+    <meta property="og:description" content="与时间共舞，迎接2026年的到来">
+    <meta property="og:image" content="https://picsum.photos/seed/2026countdown/1200/630.jpg">
+    <meta property="og:url" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            background: #000;
+        }
+        
+        /* 高级背景效果 */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            z-index: -3;
+        }
+        
+        .particle-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.6;
+        }
+        
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(120, 119, 198, 0.3) 50%, 
+                transparent 70%);
+            animation: aurora 20s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes aurora {
+            0%, 100% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+        }
+        
+        /* 3D卡片效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+        
+        /* 高级倒计时样式 */
+        .countdown-unit {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            min-width: 120px;
+            overflow: hidden;
+        }
+        
+        .countdown-unit::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .countdown-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 粒子效果 */
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleFloat 10s infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+        }
+        
+        /* 高级按钮 */
+        .premium-btn {
+            position: relative;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .premium-btn:hover::before {
+            left: 100%;
+        }
+        
+        .premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* 时间轴 */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 愿望卡片 */
+        .wish-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            border-left: 3px solid;
+            border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* 3D翻转效果 */
+        .flip-card {
+            perspective: 1000px;
+        }
+        
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        /* 音波动画 */
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .sound-bar {
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 3px;
+            animation: soundWave 1s ease-in-out infinite;
+        }
+        
+        .sound-bar:nth-child(1) { animation-delay: 0s; height: 20px; }
+        .sound-bar:nth-child(2) { animation-delay: 0.2s; height: 30px; }
+        .sound-bar:nth-child(3) { animation-delay: 0.4s; height: 25px; }
+        .sound-bar:nth-child(4) { animation-delay: 0.6s; height: 35px; }
+        .sound-bar:nth-child(5) { animation-delay: 0.8s; height: 28px; }
+        
+        @keyframes soundWave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+        
+        /* 加载动画 */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0c29;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div id="loader" class="loader">
+        <div class="loader-ring"></div>
+    </div>
+    
+    <!-- 背景层 -->
+    <div class="cosmic-bg"></div>
+    <div class="particle-field" id="particleField"></div>
+    <div class="aurora"></div>
+    
+    <!-- 主容器 -->
+    <div class="relative z-10 min-h-screen">
+        <!-- 顶部导航 -->
+        <header class="fixed top-0 w-full z-50 glass-card m-4 max-w-7xl mx-auto">
+            <nav class="flex justify-between items-center p-4">
+                <div class="flex items-center gap-2">
+                    <i class="ri-calendar-2-line text-2xl text-purple-400"></i>
+                    <span class="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">2026 Countdown</span>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-white/10 transition">
+                        <i class="ri-moon-line text-xl"></i>
+                    </button>
+                    <button onclick="toggleFullscreen()" class="p-2 rounded-lg hover:bg-white/10 transition">
+                        <i class="ri-fullscreen-line text-xl"></i>
+                    </button>
+                    <button onclick="shareCountdown()" class="p-2 rounded-lg hover:bg-white/10 transition">
+                        <i class="ri-share-line text-xl"></i>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        
+        <!-- 主要内容 -->
+        <main class="pt-24 pb-12 px-4">
+            <div class="max-w-7xl mx-auto">
+                <!-- 标题区域 -->
+                <section class="text-center mb-12">
+                    <h1 class="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                        2026
+                    </h1>
+                    <p class="text-2xl md:text-3xl text-gray-300 mb-2">新年倒计时</p>
+                    <p class="text-lg text-gray-400">与时间共舞，迎接崭新篇章</p>
+                </section>
+                
+                <!-- 倒计时核心 -->
+                <section class="glass-card p-8 mb-12">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                        <div class="countdown-unit text-center">
+                            <div id="days" class="countdown-number">00</div>
+                            <div class="text-gray-400 mt-2 font-medium">DAYS</div>
+                        </div>
+                        <div class="countdown-unit text-center">
+                            <div id="hours" class="countdown-number">00</div>
+                            <div class="text-gray-400 mt-2 font-medium">HOURS</div>
+                        </div>
+                        <div class="countdown-unit text-center">
+                            <div id="minutes" class="countdown-number">00</div>
+                            <div class="text-gray-400 mt-2 font-medium">MINUTES</div>
+                        </div>
+                        <div class="countdown-unit text-center">
+                            <div id="seconds" class="countdown-number">00</div>
+                            <div class="text-gray-400 mt-2 font-medium">SECONDS</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 年度进度 -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-400 mb-2">
+                            <span>2025 Progress</span>
+                            <span id="yearProgress">0%</span>
+                        </div>
+                        <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                            <div id="progressBar" class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 实时统计 -->
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-purple-400" id="totalSeconds">0</div>
+                            <div class="text-xs text-gray-500">总秒数</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-pink-400" id="totalMinutes">0</div>
+                            <div class="text-xs text-gray-500">总分钟数</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-blue-400" id="weekNumber">1</div>
+                            <div class="text-xs text-gray-500">第几周</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 互动功能区 -->
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <!-- 许愿墙 -->
+                    <section class="glass-card p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i class="ri-star-line text-yellow-400"></i>
+                            新年许愿墙
+                        </h3>
+                        <div class="flex gap-2 mb-4">
+                            <input 
+                                type="text" 
+                                id="wishInput" 
+                                placeholder="写下你的2026愿望..." 
+                                class="flex-1 px-4 py-2 bg-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-500"
+                                maxlength="100"
+                            >
+                            <button onclick="addWish()" class="premium-btn">
+                                <i class="ri-send-plane-line"></i>
+                            </button>
+                        </div>
+                        <div id="wishesContainer" class="max-h-60 overflow-y-auto space-y-2"></div>
+                    </section>
+                    
+                    <!-- 控制面板 -->
+                    <section class="glass-card p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i class="ri-settings-3-line text-blue-400"></i>
+                            控制中心
+                        </h3>
+                        <div class="space-y-3">
+                            <button onclick="toggleMusic()" class="w-full premium-btn flex items-center justify-center gap-2">
+                                <i class="ri-music-2-line"></i>
+                                <span id="musicBtn">开启背景音乐</span>
+                                <div id="soundWave" class="sound-wave hidden">
+                                    <div class="sound-bar"></div>
+                                    <div class="sound-bar"></div>
+                                    <div class="sound-bar"></div>
+                                    <div class="sound-bar"></div>
+                                    <div class="sound-bar"></div>
+                                </div>
+                            </button>
+                            <button onclick="launchFireworks()" class="w-full premium-btn flex items-center justify-center gap-2">
+                                <i class="ri-magic-line"></i>
+                                释放烟花
+                            </button>
+                            <button onclick="saveCountdown()" class="w-full premium-btn flex items-center justify-center gap-2">
+                                <i class="ri-download-2-line"></i>
+                                保存倒计时
+                            </button>
+                        </div>
+                    </section>
+                </div>
+                
+                <!-- 时间轴 -->
+                <section class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center">2025 时间轴</h3>
+                    <div class="timeline" id="timeline"></div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- 底部信息 -->
+        <footer class="text-center py-8 text-gray-500">
+            <p>© 2025 Countdown | 与时间共舞</p>
+        </footer>
+    </div>
+    
+    <!-- 消息提示 -->
+    <div id="toast" class="fixed bottom-8 right-8 glass-card px-6 py-3 hidden transform transition-all duration-300">
+        <p id="toastMessage" class="text-white"></p>
+    </div>
+    
+    <script>
+        // 全局变量
+        const targetDate = new Date('2026-01-01T00:00:00').getTime();
+        const yearStart = new Date('2025-01-01T00:00:00').getTime();
+        const yearEnd = new Date('2025-12-31T23:59:59').getTime();
+        let musicPlaying = false;
+        let wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+        
+        // 初始化
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+            
+            createParticles();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            loadWishes();
+            createTimeline();
+        });
+        
+        // 倒计时更新
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) {
+                celebrateNewYear();
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            // 更新进度
+            const yearProgress = ((now - yearStart) / (yearEnd - yearStart)) * 100;
+            document.getElementById('progressBar').style.width = yearProgress + '%';
+            document.getElementById('yearProgress').textContent = yearProgress.toFixed(1) + '%';
+            
+            // 更新统计
+            const totalSeconds = Math.floor(distance / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const weekNumber = Math.ceil((now - yearStart) / (1000 * 60 * 60 * 24 * 7));
+            
+            document.getElementById('totalSeconds').textContent = totalSeconds.toLocaleString();
+            document.getElementById('totalMinutes').textContent = totalMinutes.toLocaleString();
+            document.getElementById('weekNumber').textContent = weekNumber;
+        }
+        
+        // 创建粒子效果
+        function createParticles() {
+            const field = document.getElementById('particleField');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                field.appendChild(particle);
+            }
+        }
+        
+        // 烟花效果
+        function launchFireworks() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#feca57', '#ff6b6b'];
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.5;
+                    createFireworkBurst(x, y, colors[Math.floor(Math.random() * colors.length)]);
+                }, i * 200);
+            }
+            
+            showToast('🎆 烟花绽放！');
+        }
+        
+        function createFireworkBurst(x, y, color) {
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.left = x + 'px';
+            container.style.top = y + 'px';
+            container.style.pointerEvents = 'none';
+            container.style.zIndex = '9999';
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.backgroundColor = color;
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = `0 0 6px ${color}`;
+                
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 100 + Math.random() * 100;
+                
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                });
+                
+                container.appendChild(particle);
+            }
+            
+            document.body.appendChild(container);
+            setTimeout(() => container.remove(), 1000);
+        }
+        
+        // 许愿功能
+        function addWish() {
+            const input = document.getElementById('wishInput');
+            const wish = input.value.trim();
+            
+            if (!wish) {
+                showToast('✨ 请输入你的愿望');
+                return;
+            }
+            
+            const wishData = {
+                text: wish,
+                time: new Date().toLocaleString('zh-CN'),
+                id: Date.now()
+            };
+            
+            wishes.unshift(wishData);
+            if (wishes.length > 20) wishes.pop();
+            
+            localStorage.setItem('wishes', JSON.stringify(wishes));
+            displayWish(wishData);
+            input.value = '';
+            
+            showToast('🌟 愿望已记录');
+            createFireworkBurst(window.innerWidth / 2, window.innerHeight / 2, '#feca57');
+        }
+        
+        function displayWish(wishData) {
+            const container = document.getElementById('wishesContainer');
+            const wishCard = document.createElement('div');
+            wishCard.className = 'wish-card';
+            wishCard.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <p class="text-white">${wishData.text}</p>
+                        <p class="text-xs text-gray-500 mt-1">${wishData.time}</p>
+                    </div>
+                    <button onclick="removeWish(${wishData.id})" class="text-gray-500 hover:text-red-400 ml-2">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+            `;
+            container.insertBefore(wishCard, container.firstChild);
+        }
+        
+        function loadWishes() {
+            const container = document.getElementById('wishesContainer');
+            container.innerHTML = '';
+            wishes.forEach(wish => displayWish(wish));
+        }
+        
+        function removeWish(id) {
+            wishes = wishes.filter(w => w.id !== id);
+            localStorage.setItem('wishes', JSON.stringify(wishes));
+            loadWishes();
+            showToast('愿望已删除');
+        }
+        
+        // 音乐控制
+        function toggleMusic() {
+            musicPlaying = !musicPlaying;
+            const btn = document.getElementById('musicBtn');
+            const wave = document.getElementById('soundWave');
+            
+            if (musicPlaying) {
+                btn.textContent = '关闭背景音乐';
+                wave.classList.remove('hidden');
+                showToast('🎵 背景音乐已开启');
+            } else {
+                btn.textContent = '开启背景音乐';
+                wave.classList.add('hidden');
+                showToast('🔇 背景音乐已关闭');
+            }
+        }
+        
+        // 创建时间轴
+        function createTimeline() {
+            const timeline = document.getElementById('timeline');
+            const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            const currentMonth = new Date().getMonth();
+            
+            months.forEach((month, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.style.animationDelay = `${index * 0.1}s`;
+                
+                const isPast = index < currentMonth;
+                const isCurrent = index === currentMonth;
+                
+                item.innerHTML = `
+                    <div class="flex items-center gap-4 ${index % 2 === 0 ? 'flex-row-reverse' : ''}">
+                        <div class="flex-1 text-${index % 2 === 0 ? 'right' : 'left'}">
+                            <div class="glass-card inline-block p-3">
+                                <h4 class="font-bold ${isCurrent ? 'text-purple-400' : isPast ? 'text-gray-400' : 'text-gray-600'}">${month}</h4>
+                                <p class="text-sm text-gray-500">${isPast ? '已度过' : isCurrent ? '进行中' : '未到来'}</p>
+                            </div>
+                        </div>
+                        <div class="w-4 h-4 bg-${isCurrent ? 'purple-500' : isPast ? 'gray-500' : 'gray-700'} rounded-full border-2 border-gray-300"></div>
+                        <div class="flex-1"></div>
+                    </div>
+                `;
+                
+                timeline.appendChild(item);
+            });
+        }
+        
+        // 工具函数
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                showToast('进入全屏模式');
+            } else {
+                document.exitFullscreen();
+                showToast('退出全屏模式');
+            }
+        }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            showToast('主题已切换');
+        }
+        
+        function saveCountdown() {
+            const data = {
+                date: new Date().toISOString(),
+                days: document.getElementById('days').textContent,
+                hours: document.getElementById('hours').textContent,
+                minutes: document.getElementById('minutes').textContent,
+                seconds: document.getElementById('seconds').textContent,
+                wishes: wishes
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `countdown-${Date.now()}.json`;
+            a.click();
+            
+            showToast('倒计时数据已保存');
+        }
+        
+        function shareCountdown() {
+            const shareData = {
+                title: '2026新年倒计时',
+                text: `距离2026年还有 ${document.getElementById('days').textContent} 天！`,
+                url: window.location.href
+            };
+            
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+                showToast('链接已复制到剪贴板');
+            }
+        }
+        
+        function celebrateNewYear() {
+            document.querySelector('h1').textContent = '🎊 新年快乐！🎊';
+            
+            const interval = setInterval(() => {
+                launchFireworks();
+            }, 1000);
+            
+            setTimeout(() => clearInterval(interval), 10000);
+            showToast('🎉 恭喜！2026年到来了！');
+        }
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.activeElement.id === 'wishInput') {
+                addWish();
+            }
+            if (e.key === 'f' && e.ctrlKey) {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+            if (e.key === ' ') {
+                e.preventDefault();
+                launchFireworks();
+            }
+        });
+        
+        // 点击屏幕放烟花
+        document.addEventListener('click', (e) => {
+            if (e.target === document.body || e.target.classList.contains('cosmic-bg')) {
+                createFireworkBurst(e.clientX, e.clientY, '#667eea');
+            }
+        });
+    </script>
+</body>
+</html>
